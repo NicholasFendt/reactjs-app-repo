@@ -4,8 +4,10 @@ phases:
     runtime-versions:
       nodejs: 20
     commands:
+      - echo Increasing file descriptor limit...
+      - ulimit -n 4096
       - echo Installing dependencies...
-      - npm install
+      - npm ci
   build:
     commands:
       - echo Building the React app...
@@ -14,3 +16,6 @@ artifacts:
   files:
     - '**/*'
   base-directory: build
+cache:
+  paths:
+    - 'node_modules/**/*'
